@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNBAN TOOL IOS DEV</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(180deg, #000000, #00aa55);
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 420px;
+    min-height: 100vh;
+    padding: 15px;
+}
+
+/* TAG BLINK */
+.tag {
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {color: yellow;}
+    50% {color: red;}
+    100% {color: yellow;}
+}
+
+/* INFO */
+.info {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* TIMER */
+.timer {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 16px;
+    color: cyan;
+}
+
+/* INPUT */
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    border: none;
+    margin: 5px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0;
+    border-radius: 15px;
+    border: none;
+    background: linear-gradient(90deg, #00ff99, #00cc66);
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px #00ff99;
+}
+
+/* NAME */
+.name {
+    text-align: center;
+    margin: 8px 0;
+    color: yellow;
+    font-weight: bold;
+}
+
+/* LOG BOX */
+.log {
+    background: black;
+    color: lime;
+    height: 220px;
+    padding: 8px;
+    overflow-y: auto;
+    border-radius: 10px;
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: linear-gradient(180deg, #004422, #00aa55);
+    padding: 20px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 300px;
+}
+
+.modal-box input {
+    margin-bottom: 10px;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    font-size: 11px;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="tag">
+UNBAN - CHECK MAIL - REFUND ACCOUNT FREE FIRE - SPAMLOGIN
+</div>
+
+<div class="info">
+Tool đang được phát triển bởi đội ngũ DEV IOS<br>
+TikTok: VY BẮN BOT | Zalo: 033.577.507
+</div>
+
+<div class="timer" id="timer">Thời gian sử dụng: 24:12:09</div>
+
+<input id="gameId" placeholder="Nhập ID Game">
+<button onclick="showName()">ENTER</button>
+
+<div class="name" id="name">Tên Ingame: ---</div>
+
+<button onclick="checkMail()">CHECK MAIL XT</button>
+<button onclick="spamLogin()">SPAM LOGIN</button>
+<button onclick="openChangeMail()">CHANGE MAIL</button>
+<button onclick="band15()">BAND 15 DAY</button>
+
+<div class="log" id="logBox"></div>
+
+<div class="footer">
+© IOS DEV TEAM
+</div>
+
+</div>
+
+<!-- CHANGE MAIL MODAL -->
+<div class="modal" id="mailModal">
+<div class="modal-box">
+<h3 style="text-align:center;">CHANGE MAIL</h3>
+<input id="newMail" placeholder="New Email">
+<input id="secCode" placeholder="Security Code">
+<button onclick="confirmChangeMail()">CONFIRM</button>
+<button onclick="closeModal()">CLOSE</button>
+</div>
+</div>
+
+<script>
+let fakeName = "WAG.Po";
+let fakeMail = "wagpo@gmail.com";
+let fakePass = "PassAccount123";
+
+function showName(){
+    document.getElementById("name").innerText = "Tên Ingame: " + fakeName;
+}
+
+function checkMail(){
+    let log = document.getElementById("logBox");
+    log.innerHTML = "";
+    let lines = [
+        "[+] Connecting server...",
+        "[+] Checking mail verify...",
+        "[+] Mail: " + fakeMail,
+        "[+] Status: VERIFIED",
+        "[+] Data received successfully",
+        "[+] Pass Account: " + fakePass
+    ];
+    lines.forEach(l=>{
+        log.innerHTML += l + "<br>";
+    });
+}
+
+function spamLogin(){
+    let log = document.getElementById("logBox");
+    log.innerHTML = "";
+    let count = 0;
+    let interval = setInterval(()=>{
+        let now = new Date().toLocaleTimeString();
+        log.innerHTML += "[LOGIN] Success at " + now + "<br>";
+        count++;
+        if(count>=10) clearInterval(interval);
+    },10000);
+}
+
+function openChangeMail(){
+    document.getElementById("mailModal").style.display="flex";
+}
+
+function closeModal(){
+    document.getElementById("mailModal").style.display="none";
+}
+
+function confirmChangeMail(){
+    closeModal();
+    alert("Change Mail Successfully!");
+}
+
+function band15(){
+    alert("account is band 15day by IOSDev");
+}
+
+// TIMER
+let totalSeconds = 24*3600 + 12*60 + 9;
+setInterval(()=>{
+    if(totalSeconds>0){
+        totalSeconds--;
+        let h = String(Math.floor(totalSeconds/3600)).padStart(2,"0");
+        let m = String(Math.floor((totalSeconds%3600)/60)).padStart(2,"0");
+        let s = String(totalSeconds%60).padStart(2,"0");
+        document.getElementById("timer").innerText =
+        "Thời gian sử dụng: " + h + ":" + m + ":" + s;
+    }
+},1000);
+</script>
+
+</body>
+</html>
